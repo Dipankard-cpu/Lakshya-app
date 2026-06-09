@@ -175,7 +175,6 @@ function findStudent(studentId) {
   return getApplications().find((app) => String(app.studentId) === String(studentId));
 }
 
-generateStudentQR(student.studentId);
 
 function showPage(pageId = "home") {
   const validPage = pages.some((page) => page.dataset.page === pageId) ? pageId : "home";
@@ -185,6 +184,10 @@ function showPage(pageId = "home") {
     history.replaceState(null, "", `#${validPage}`);
   }
 }
+
+
+generateStudentQR(student.studentId);
+
 
 function renderCourses() {
   const courses = getCourses();
