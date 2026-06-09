@@ -175,6 +175,8 @@ function findStudent(studentId) {
   return getApplications().find((app) => String(app.studentId) === String(studentId));
 }
 
+generateStudentQR(student.studentId);
+
 function showPage(pageId = "home") {
   const validPage = pages.some((page) => page.dataset.page === pageId) ? pageId : "home";
   pages.forEach((page) => page.classList.toggle("active", page.dataset.page === validPage));
