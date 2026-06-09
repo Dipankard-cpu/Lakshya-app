@@ -176,7 +176,7 @@ window.getDoc = getDoc;
               <input name="studentId" required inputmode="numeric" placeholder="Example: 1" />
             </label>
             
-            <div id="studentQR"></div>
+            <!-- <div id="studentQR"></div> -->
             
             <button class="button secondary" type="submit">Login Student</button>
           </form>
@@ -714,7 +714,29 @@ document.body.innerText.match(/ID No:\s*(\d+)/);
 });
 
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAxidu5Px8fEuzaJWysu8hwi7O5yoL1b1k",
+  authDomain: "lakshya-academy01.firebaseapp.com",
+  projectId: "lakshya-academy01",
+  storageBucket: "lakshya-academy01.firebasestorage.app",
+  messagingSenderId: "829597888125",
+  appId: "1:829597888125:web:28dc7c3f8136ed1358cb14",
+  measurementId: "G-3YE0TSDRTN"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+window.firebaseDB = db;
+
+</script>
 
 </body>
 </html>
