@@ -216,7 +216,7 @@ function generateStudentQR(studentId) {
       console.log("QR GENERATED");
    });
 }
-}
+
 // eta add kora holo
 
 function renderCourses() {
