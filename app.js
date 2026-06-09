@@ -311,6 +311,11 @@ function renderStudentSession() {
   studentBadge.textContent = student ? `${student.studentName} · ID ${student.studentId}` : "Guest Mode";
   studentPanel.hidden = !student;
   studentPanel.innerHTML = student ? renderIdCard(student) : "";
+  if(student){
+   setTimeout(() => {
+      generateStudentQR(student.studentId);
+   }, 200);
+}
 }
 
 // function renderIdCard(student) {
