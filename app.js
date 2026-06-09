@@ -384,8 +384,6 @@ function renderIdCard(student) {
         <p>Joining: ${escapeHtml(student.joiningDate)}</p>
         <div id="studentQR" style="margin-top:15px;"></div>
 
-        <div id="studentQR"></div>
-
       </div>
 
     </div>
