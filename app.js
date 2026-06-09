@@ -186,7 +186,7 @@ function showPage(pageId = "home") {
 }
 
 
-generateStudentQR(student.studentId);
+// generateStudentQR(student.studentId); hide kora holo
 
 
 function renderCourses() {
@@ -2089,3 +2089,41 @@ function generateStudentQR(studentId) {
    });
 }
 
+// ===================================
+// FIREBASE AUTO BACKUP SYSTEM add kora holo qr er jonno
+// ===================================
+
+async function backupAllData() {
+
+   const db = window.firebaseDB;
+
+   if(!db) return;
+
+   const allData = {
+
+      students:
+      JSON.parse(localStorage.getItem("lakshya-students") || "[]"),
+
+      payments:
+      JSON.parse(localStorage.getItem("lakshya-payments") || "[]"),
+
+      attendance:
+      JSON.parse(localStorage.getItem("lakshya-attendance") || "[]"),
+
+      teachers:
+      JSON.parse(localStorage.getItem("lakshya-teachers") || "[]")
+
+   };
+
+   await db.collection("backup")
+      .doc("mainData")
+      .set(allData);
+
+   console.log("Backup Completed");
+}
+
+setInterval(() => {
+
+   backupAllData();
+
+}, 10000);
