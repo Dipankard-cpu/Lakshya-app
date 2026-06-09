@@ -189,24 +189,33 @@ function showPage(pageId = "home") {
 // generateStudentQR(student.studentId); hide kora holo
 function generateStudentQR(studentId) {
 
-   const qrBox =
-document.querySelector("#studentQR");
+   const qrBox = document.getElementById("studentQR");
 
-   if(!qrBox) return;
+   if(!qrBox) {
+      console.log("QR BOX NOT FOUND");
+      return;
+   }
 
    qrBox.innerHTML = "";
 
-   QRCode.toCanvas(studentId, {
-      width: 160
-   }, function (err, canvas) {
+   QRCode.toCanvas(studentId.toString(), {
 
-      if(err){
-         console.log(err);
+      width: 140
+
+   }, function(error, canvas) {
+
+      if(error){
+
+         console.log("QR ERROR:", error);
+
          return;
       }
 
       qrBox.appendChild(canvas);
+
+      console.log("QR GENERATED");
    });
+}
 }
 // eta add kora holo
 
