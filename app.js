@@ -368,6 +368,7 @@ function renderIdCard(student) {
         <p>Course: ${escapeHtml(student.course)}</p>
 
         <p>Joining: ${escapeHtml(student.joiningDate)}</p>
+        <div id="studentQR" style="margin-top:15px;"></div>
 
         <div id="studentQR"></div>
 
