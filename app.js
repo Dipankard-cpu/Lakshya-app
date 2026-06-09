@@ -2022,7 +2022,7 @@ document.addEventListener("click",(e)=>{
 
 //jkjhjhjhhjjhhjjh
 // ===================================
-// FIREBASE AUTO BACKUP SYSTEM
+// FIREBASE AUTO BACKUP SYSTEM 1st changes succesfull hoyeche
 // ===================================
 
 async function backupAllData() {
@@ -2060,3 +2060,27 @@ setInterval(() => {
    backupAllData();
 
 }, 10000);
+
+
+// ============================
+// QR CODE SYSTEM 2nd time changes
+// ============================
+
+function generateStudentQR(studentId) {
+
+   const qrBox = document.querySelector("#studentQR");
+
+   if(!qrBox) return;
+
+   qrBox.innerHTML = "";
+
+   QRCode.toCanvas(studentId, {
+      width: 180
+   }, function (err, canvas) {
+
+      if(err) return;
+
+      qrBox.appendChild(canvas);
+   });
+}
+
