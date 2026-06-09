@@ -187,7 +187,28 @@ function showPage(pageId = "home") {
 
 
 // generateStudentQR(student.studentId); hide kora holo
+function generateStudentQR(studentId) {
 
+   const qrBox =
+document.querySelector("#studentQR");
+
+   if(!qrBox) return;
+
+   qrBox.innerHTML = "";
+
+   QRCode.toCanvas(studentId, {
+      width: 160
+   }, function (err, canvas) {
+
+      if(err){
+         console.log(err);
+         return;
+      }
+
+      qrBox.appendChild(canvas);
+   });
+}
+// eta add kora holo
 
 function renderCourses() {
   const courses = getCourses();
