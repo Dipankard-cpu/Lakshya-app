@@ -313,28 +313,81 @@ function renderStudentSession() {
   studentPanel.innerHTML = student ? renderIdCard(student) : "";
 }
 
+// function renderIdCard(student) {
+//   <div id="studentQR"></div>
+//   const photo = student.photoData
+//     ? `<img src="${student.photoData}" alt="${escapeHtml(student.studentName)} photo" />`
+//     : `<div class="id-placeholder">${escapeHtml(student.studentName.charAt(0) || "S")}</div>`;
+
+//   return `
+//     <div class="id-card">
+//       <div class="id-photo">${photo}</div>
+//       <div>
+//         <p class="eyebrow">Student ID Card</p>
+//         <h3>${escapeHtml(student.studentName)}</h3>
+//         <p>ID No: ${escapeHtml(student.studentId)}</p>
+//         <p>Course: ${escapeHtml(student.course)}</p>
+//         <p>Joining: ${escapeHtml(student.joiningDate)}</p>
+//       </div>
+//     </div>
+//     <div class="id-actions">
+//       <button class="button secondary print-id" type="button">Print ID Card</button>
+//       <button class="button primary download-id" type="button">Download ID Card</button>
+//     </div>
+//     setTimeout(() => {
+//    generateStudentQR(student.studentId);
+// }, 100);
+//   `;
+// }
+
 function renderIdCard(student) {
+
   const photo = student.photoData
     ? `<img src="${student.photoData}" alt="${escapeHtml(student.studentName)} photo" />`
     : `<div class="id-placeholder">${escapeHtml(student.studentName.charAt(0) || "S")}</div>`;
 
+  setTimeout(() => {
+      generateStudentQR(student.studentId);
+  }, 100);
+
   return `
     <div class="id-card">
-      <div class="id-photo">${photo}</div>
-      <div>
-        <p class="eyebrow">Student ID Card</p>
-        <h3>${escapeHtml(student.studentName)}</h3>
-        <p>ID No: ${escapeHtml(student.studentId)}</p>
-        <p>Course: ${escapeHtml(student.course)}</p>
-        <p>Joining: ${escapeHtml(student.joiningDate)}</p>
+
+      <div class="id-photo">
+        ${photo}
       </div>
+
+      <div class="id-details">
+
+        <p class="eyebrow">Student ID Card</p>
+
+        <h3>${escapeHtml(student.studentName)}</h3>
+
+        <p>ID No: ${escapeHtml(student.studentId)}</p>
+
+        <p>Course: ${escapeHtml(student.course)}</p>
+
+        <p>Joining: ${escapeHtml(student.joiningDate)}</p>
+
+        <div id="studentQR"></div>
+
+      </div>
+
     </div>
+
     <div class="id-actions">
-      <button class="button secondary print-id" type="button">Print ID Card</button>
-      <button class="button primary download-id" type="button">Download ID Card</button>
+      <button class="button secondary print-id" type="button">
+        Print ID Card
+      </button>
+
+      <button class="button primary download-id" type="button">
+        Download ID Card
+      </button>
     </div>
   `;
 }
+
+// save changes kora holo oporerta
 
 function loadImage(src) {
   return new Promise((resolve) => {
