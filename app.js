@@ -298,17 +298,44 @@ function renderApplications() {
 }
 
 function renderStudentSession() {
-  const studentId = localStorage.getItem(studentSessionKey);
-  const student = studentId ? findStudent(studentId) : null;
-  studentBadge.textContent = student ? `${student.studentName} · ID ${student.studentId}` : "Guest Mode";
+
+  const studentId =
+localStorage.getItem(studentSessionKey);
+
+  const student =
+studentId ? findStudent(studentId) : null;
+
+  studentBadge.textContent =
+student
+? `${student.studentName} · ID ${student.studentId}`
+: "Guest Mode";
+
   studentPanel.hidden = !student;
-  studentPanel.innerHTML = student ? renderIdCard(student) : "";
+
+  studentPanel.innerHTML =
+student ? renderIdCard(student) : "";
+
   if(student){
-   setTimeout(() => {
-      generateStudentQR(student.studentId);
-   }, 200);
+
+     setTimeout(()=>{
+
+        const qrBox =
+document.getElementById("studentQR");
+
+        if(qrBox){
+
+           qrBox.innerHTML = `
+              <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${student.studentId}"
+              alt="QR"
+              />
+           `;
+        }
+
+     },500);
+  }
 }
-}
+
 
 // function renderIdCard(student) {
 //   <div id="studentQR"></div>
