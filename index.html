@@ -1,0 +1,683 @@
+
+
+
+
+
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Admission App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="App overview">
+        <div>
+          <p class="eyebrow">Student Portal</p>
+          <h1>Center / School Management</h1>
+          <p class="intro">Admission, student ID, class routine, attendance, updates, and staff access.</p>
+        </div>
+        <div class="top-actions">
+          <a class="button secondary" href="#staff" data-nav="staff">Staff</a>
+          <div class="student-badge" id="studentBadge">Guest Mode</div>
+        </div>
+      </section>
+
+      <nav class="nav-bar" aria-label="Main navigation">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#admission" data-nav="admission">Admission</a>
+        <a href="#student" data-nav="student">Student ID</a>
+        <a href="#updates" data-nav="updates">Updates</a>
+        <a href="#routine" data-nav="routine">Routine</a>
+        <a href="#attendance" data-nav="attendance">Attendance</a>
+        <a href="#staff" data-nav="staff">Admin / Teacher</a>
+      </nav>
+
+      <section class="page active" id="home" data-page="home">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="status-row">
+              <span class="status-pill">Admission Open</span>
+              <span class="status-pill muted">Batch 2026</span>
+            </div>
+            <h2>আপনার Center / School details</h2>
+            <p>এই main page-এ আপনার institute-এর নাম, photo, contact, address, achievements, and admission notice দেখানো যাবে। এখন sample content রাখা হলো, পরে আপনি চাইলে exact নাম/লোগো/ঠিকানা বসিয়ে দেব।</p>
+            <div class="center-details">
+              <div><strong>Center Name</strong><span>DIPANKAR Learning Center</span></div>
+              <div><strong>Contact</strong><span>+91 98765 43210</span></div>
+              <div><strong>Address</strong><span>Kolkata, West Bengal</span></div>
+              <div><strong>Office Time</strong><span>10:00 AM - 6:00 PM</span></div>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#admission" data-nav="admission">Apply Now</a>
+              <a class="button secondary" href="#updates" data-nav="updates">Latest Updates</a>
+            </div>
+          </div>
+          <img class="hero-image" src="assets/student-dashboard-banner.png" alt="Students using a learning dashboard in a classroom" />
+        </div>
+      </section>
+
+      <section class="page" id="admission" data-page="admission">
+        <article class="panel admission-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Admission</p>
+              <h2>Student Admission Form</h2>
+            </div>
+            <span class="mini-stat" id="applicationCount">0 Applied</span>
+          </div>
+
+          <form id="admissionForm" class="form-grid">
+            <label>
+              Student Name
+              <input name="studentName" required placeholder="Full name" autocomplete="name" />
+            </label>
+            <label>
+              Guardian Name
+              <input name="guardianName" required placeholder="Guardian name" />
+            </label>
+            <label>
+              Phone Number
+              <input name="phone" required inputmode="tel" placeholder="+91 98765 43210" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" placeholder="student@example.com" autocomplete="email" />
+            </label>
+            <label>
+              Course / Class
+              <select name="course" id="courseSelect" required></select>
+            </label>
+            <label>
+              Preferred Batch
+              <select name="batch" required>
+                <option value="">Select batch</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+                <option>Weekend</option>
+              </select>
+            </label>
+            <label>
+              Student Photo
+              <input name="photo" type="file" accept="image/*" />
+            </label>
+            <label>
+              Joining Date
+              <input name="joiningDate" type="date" required />
+            </label>
+            <label class="full">
+              Address
+              <textarea name="address" rows="3" placeholder="House, area, city"></textarea>
+            </label>
+            <label class="full">
+              Notes
+              <textarea name="notes" rows="3" placeholder="Any subject preference or question"></textarea>
+            </label>
+            <button class="button primary full" type="submit">Submit Admission</button>
+          </form>
+        </article>
+
+        <article class="panel records-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Records</p>
+              <h2>Submitted Applications</h2>
+            </div>
+            <button class="button ghost" id="clearApplications" type="button">Clear Demo Data</button>
+          </div>
+          <div class="applications" id="applicationsList"></div>
+        </article>
+      </section>
+
+      <section class="page" id="student" data-page="student">
+        <article class="panel" id="studentLogin">
+          <p class="eyebrow">Student ID</p>
+          <h2>Login by Student ID</h2>
+          <form id="studentLoginForm" class="compact-form">
+            <label>
+              Student ID
+              <input name="studentId" required inputmode="numeric" placeholder="Example: 1" />
+            </label>
+            <button class="button secondary" type="submit">Login Student</button>
+          </form>
+          <div id="studentPanel" class="student-panel" hidden></div>
+        </article>
+      </section>
+
+      <section class="page" id="updates" data-page="updates">
+        <article class="panel update-card">
+          <div class="panel-heading tight">
+            <div>
+              <p class="eyebrow">Updates</p>
+              <h2>Latest Notices</h2>
+            </div>
+            <span class="dot-live"></span>
+          </div>
+          <div class="updates-list" id="updatesList"></div>
+        </article>
+      </section>
+
+      <section class="page" id="routine" data-page="routine">
+        <div class="two-column">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Routine</p>
+                <h2>Weekly Class Schedule</h2>
+              </div>
+              <button class="icon-button" id="todayOnly" type="button" aria-label="Show today's routine">Today</button>
+            </div>
+            <div class="routine-table" id="routineTable"></div>
+          </article>
+
+          <article class="panel class-panel">
+            <p class="eyebrow">Future Classes</p>
+            <h2>Online Class Room</h2>
+            <p class="class-copy">Admin panel থেকে live class link set করলে students এখান থেকেই class attend করতে পারবে।</p>
+            <div class="class-room">
+              <div class="play-circle">▶</div>
+              <div>
+                <strong id="liveClassTitle">Next live class</strong>
+                <span id="liveClassMeta">Physics: Motion & Graphs</span>
+              </div>
+            </div>
+            <button class="button primary" id="joinClass" type="button">Join Class</button>
+            <p class="class-message" id="classMessage"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="attendance" data-page="attendance">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Attendance</p>
+              <h2>Student Attendance</h2>
+            </div>
+            <span class="mini-stat" id="attendanceCount">0 Records</span>
+          </div>
+          <div class="attendance-grid">
+            <form id="attendanceForm" class="tool-card" hidden>
+              <p class="eyebrow">Mark Attendance</p>
+              <h3>Admin Only</h3>
+              <label>
+                Student
+                <select name="studentId" id="attendanceStudentSelect" required></select>
+              </label>
+              <label>
+                Date
+                <input name="date" type="date" required />
+              </label>
+              <label>
+                Status
+                <select name="status" required>
+                  <option>Present</option>
+                  <option>Absent</option>
+                  <option>Late</option>
+                </select>
+              </label>
+              <button class="button secondary" type="submit">Save Attendance</button>
+            </form>
+            <div class="attendance-list" id="attendanceList"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="page" id="staff" data-page="staff">
+        <article class="panel admin-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Staff Access</p>
+              <h2>Admin & Teacher Panel</h2>
+            </div>
+            <span class="mini-stat" id="adminStatus">Locked</span>
+          </div>
+
+          <form id="staffLoginForm" class="admin-login">
+            <label>
+              Admin ID or Teacher ID
+              <input name="loginId" required placeholder="Admin: DIPANKAR1 / Teacher ID" />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" required placeholder="Admin password or teacher password" />
+            </label>
+            <button class="button primary" type="submit">Login Staff</button>
+          </form>
+
+          <div class="admin-tools" id="adminTools" hidden>
+            <div class="admin-grid">
+              <form id="sheetConfigForm" class="tool-card">
+                <p class="eyebrow">Google Sheets</p>
+                <h3>Submission Connection</h3>
+                <label>
+                  Apps Script Web App URL
+                  <input name="sheetUrl" placeholder="https://script.google.com/macros/s/..." />
+                </label>
+                <button class="button secondary" type="submit">Save Sheet URL</button>
+                <p class="helper-text" id="sheetStatus">Not connected yet.</p>
+              </form>
+
+              <form id="teacherForm" class="tool-card">
+                <p class="eyebrow">Teachers</p>
+                <h3>Add View-only Teacher</h3>
+                <label>
+                  Teacher Name
+                  <input name="name" required placeholder="Teacher name" />
+                </label>
+                <label>
+                  Teacher ID
+                  <input name="teacherId" required placeholder="teacher01" />
+                </label>
+                <label>
+                  Password
+                  <input name="password" required placeholder="Set password" />
+                </label>
+                <button class="button secondary" type="submit">Add Teacher</button>
+                <div id="teacherList" class="mini-list"></div>
+              </form>
+
+              <form id="courseForm" class="tool-card">
+                <p class="eyebrow">Courses</p>
+                <h3>Admission Course List</h3>
+                <label>
+                  Course Name
+                  <input name="course" required placeholder="New course name" />
+                </label>
+                <button class="button secondary" type="submit">Add Course</button>
+                <div id="courseList" class="mini-list"></div>
+              </form>
+
+              <form id="updateForm" class="tool-card">
+                <p class="eyebrow">Updates</p>
+                <h3>Post New Notice</h3>
+                <label>
+                  Title
+                  <input name="title" required placeholder="Notice title" />
+                </label>
+                <label>
+                  Details
+                  <textarea name="meta" required rows="3" placeholder="Notice details"></textarea>
+                </label>
+                <button class="button secondary" type="submit">Publish Update</button>
+              </form>
+
+              <form id="routineForm" class="tool-card">
+                <p class="eyebrow">Routine</p>
+                <h3>Add Class Routine</h3>
+                <label>
+                  Day
+                  <select name="day" required>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                  </select>
+                </label>
+                <label>
+                  Subject
+                  <input name="subject" required placeholder="Subject name" />
+                </label>
+                <label>
+                  Time
+                  <input name="time" required placeholder="5:00 PM - 6:30 PM" />
+                </label>
+                <label>
+                  Teacher
+                  <input name="teacher" required placeholder="Teacher name" />
+                </label>
+                <button class="button secondary" type="submit">Add Routine</button>
+              </form>
+
+              <form id="classLinkForm" class="tool-card">
+                <p class="eyebrow">Live Class</p>
+                <h3>Set Class Link</h3>
+                <label>
+                  Class Title
+                  <input name="title" required placeholder="Physics: Motion & Graphs" />
+                </label>
+                <label>
+                  Time / Details
+                  <input name="meta" required placeholder="Today, 7:00 PM" />
+                </label>
+                <label>
+                  Video Meeting Link
+                  <input name="url" type="url" required placeholder="https://meet.google.com/..." />
+                </label>
+                <button class="button secondary" type="submit">Save Live Class</button>
+              </form>
+            </div>
+            <button class="button ghost" id="adminLogout" type="button">Logout Admin</button>
+          </div>
+
+          <div class="staff-view" id="staffView" hidden>
+            <p class="helper-text" id="staffModeText"></p>
+            <div class="details-actions">
+              <button class="button secondary" id="exportStudents" type="button">Download Student Details CSV</button>
+              <button class="button ghost" id="staffLogout" type="button">Logout Staff</button>
+            </div>
+            <form id="studentEditForm" class="tool-card student-edit-form" hidden>
+              <p class="eyebrow">Admin Edit</p>
+              <h3>Edit Student Details</h3>
+              <input name="studentId" type="hidden" />
+              <div class="form-grid">
+                <label>
+                  Student Name
+                  <input name="studentName" required />
+                </label>
+                <label>
+                  Guardian Name
+                  <input name="guardianName" required />
+                </label>
+                <label>
+                  Phone
+                  <input name="phone" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" />
+                </label>
+                <label>
+                  Course
+                  <select name="course" id="editCourseSelect" required></select>
+                </label>
+                <label>
+                  Batch
+                  <select name="batch" required>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                    <option>Weekend</option>
+                  </select>
+                </label>
+                <label>
+                  Joining Date
+                  <input name="joiningDate" type="date" required />
+                </label>
+                <label>
+                  Replace Photo
+                  <input name="photo" type="file" accept="image/*" />
+                </label>
+                <label class="full">
+                  Address
+                  <textarea name="address" rows="3"></textarea>
+                </label>
+                <label class="full">
+                  Notes
+                  <textarea name="notes" rows="3"></textarea>
+                </label>
+              </div>
+              <div class="details-actions">
+                <button class="button primary" type="submit">Save Student</button>
+                <button class="button ghost" id="cancelStudentEdit" type="button">Cancel</button>
+              </div>
+            </form>
+            <div id="staffActivityPanel" class="staff-activity" hidden></div>
+            <div class="student-details-table" id="studentDetailsTable"></div>
+          </div>
+        </article>
+      </section>
+    
+
+<!-- ========================= -->
+<!-- NEW ADMIN MANAGEMENT AREA -->
+<!-- ========================= -->
+
+<section class="panel" id="advancedManagement">
+
+  <h2>Advanced Management</h2>
+
+  <div class="card">
+    <h3>Student Payment Entry</h3>
+
+    <form id="paymentForm">
+
+      <input type="text" name="studentId" placeholder="Student ID" required>
+
+      <input type="number" name="amount" placeholder="Amount" required>
+
+      <input type="text" name="month" placeholder="Month" required>
+
+      <button type="submit">Save Payment</button>
+
+    </form>
+  </div>
+
+  <div class="card">
+
+    <h3>Expense Entry</h3>
+
+    <form id="expenseForm">
+
+      <input type="text" name="title" placeholder="Expense Title" required>
+
+      <input type="number" name="amount" placeholder="Expense Amount" required>
+
+      <button type="submit">Save Expense</button>
+
+    </form>
+
+  </div>
+
+  <div id="overviewPanel"></div>
+
+  <div id="salarySheet"></div>
+
+</section>
+
+
+
+<section class="panel">
+  <h2>Staff / Teacher Management</h2>
+
+  <div class="card">
+    <h3>Add Staff / Teacher</h3>
+
+    <form id="staffForm">
+
+      <input type="text" name="name" placeholder="Teacher / Staff Name" required>
+
+      <input type="text" name="staffId" placeholder="Staff ID" required>
+
+      <input type="password" name="password" placeholder="Password" required>
+
+      <select name="role">
+        <option value="teacher">Teacher</option>
+        <option value="staff">Staff</option>
+      </select>
+
+      <button type="submit">Add Staff</button>
+
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Staff List</h3>
+
+    <div id="staffList"></div>
+  </div>
+
+</section>
+
+
+
+<section class="panel">
+
+  <h2>Salary Overview</h2>
+
+  <div class="card">
+    <h3>Teacher Salary Overview</h3>
+    <div id="teacherSalaryOverview"></div>
+  </div>
+
+  <div class="card">
+    <h3>Staff Salary Overview</h3>
+
+    <form id="staffSalaryForm">
+
+      <input type="text" name="staffName" placeholder="Staff Name" required>
+
+      <input type="number" name="salary" placeholder="Monthly Salary" required>
+
+      <button type="submit">Save Salary</button>
+
+    </form>
+
+    <div id="staffSalaryOverview"></div>
+
+  </div>
+
+</section>
+
+
+
+
+<section class="panel">
+
+  <h2>Payment Management</h2>
+
+  <div class="card">
+    <h3>Payment History</h3>
+    <div id="paymentHistoryList"></div>
+  </div>
+
+</section>
+
+
+
+
+
+
+<section class="panel" id="fixedLoginArea">
+
+  <div class="card">
+
+    <h2>Admin / Staff Login</h2>
+
+    <form id="loginForm">
+
+      <input type="text" name="username"
+      placeholder="Admin / Staff ID" required>
+
+      <input type="password" name="password"
+      placeholder="Password" required>
+
+      <button type="submit">
+      Login Staff
+      </button>
+
+    </form>
+
+    <div id="currentUserBox"></div>
+
+    <button id="logoutBtn">
+    Logout
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<section class="panel" id="studentPaymentPage">
+
+<h2>Student Payment Card</h2>
+
+<div class="card">
+
+<input type="text"
+id="paymentSearchInput"
+placeholder="Enter Student ID">
+
+<button id="searchPaymentBtn">
+Search Student
+</button>
+
+</div>
+
+<div id="studentPaymentCard"></div>
+
+</section>
+
+
+
+</main>
+
+    <script src="app.js"></script>
+  
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+
+  const oldPanel = document.querySelector(".staff-access");
+
+  if(oldPanel){
+
+     const extra = document.createElement("div");
+
+     extra.innerHTML = `
+        <div class="card">
+           <h3>Current Login</h3>
+           <div id="currentUserBox"></div>
+           <button id="logoutBtn">Logout</button>
+        </div>
+     `;
+
+     oldPanel.appendChild(extra);
+  }
+});
+</script>
+
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+   const buttons = document.querySelectorAll("button");
+
+   buttons.forEach(btn=>{
+
+      if(btn.innerText.includes("Download ID Card")){
+
+         const paymentBtn = document.createElement("button");
+
+         paymentBtn.innerText = "Print Payment Card";
+
+         paymentBtn.style.marginLeft = "10px";
+
+         paymentBtn.onclick = ()=>{
+
+            const idText =
+document.body.innerText.match(/ID No:\s*(\d+)/);
+
+            if(idText){
+
+               renderStudentPaymentCard(idText[1]);
+
+               window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth"
+               });
+            }
+         };
+
+         btn.after(paymentBtn);
+      }
+   });
+
+});
+
+</script>
+
+
+</body>
+</html>

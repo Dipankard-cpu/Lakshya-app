@@ -1,0 +1,12 @@
+MANAGER LOGIN DETAILS
+
+username: manager
+password: 1234
+
+Manager can:
+- Add payment
+- Add attendance
+- Add students
+
+Manager cannot:
+- Delete anything
