@@ -968,7 +968,7 @@ window.addEventListener("hashchange", () => {
 });
 
 admissionForm.joiningDate.valueAsDate = new Date();
-attendanceForm.date.valueAsDate = new Date();
+attendanceForm.querySelector('[name="date"]').valueAsDate = new Date();
 renderCourses();
 renderUpdates();
 renderRoutine();
