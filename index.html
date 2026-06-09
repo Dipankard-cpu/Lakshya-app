@@ -11,6 +11,37 @@
     <title>Student Admission App</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAxidu5Px8fEuzaJWysu8hwi7O5yoL1b1k",
+  authDomain: "lakshya-academy01.firebaseapp.com",
+  projectId: "lakshya-academy01",
+  storageBucket: "lakshya-academy01.firebasestorage.app",
+  messagingSenderId: "829597888125",
+  appId: "1:829597888125:web:28dc7c3f8136ed1358cb14",
+  measurementId: "G-3YE0TSDRTN"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.firebaseDB = db;
+window.setDoc = setDoc;
+window.doc = doc;
+window.getDoc = getDoc;
+
+</script>
   <body>
     <main class="app-shell">
       <section class="topbar" aria-label="App overview">
