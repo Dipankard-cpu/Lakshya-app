@@ -2020,3 +2020,43 @@ document.addEventListener("click",(e)=>{
    }
 });
 
+//jkjhjhjhhjjhhjjh
+// ===================================
+// FIREBASE AUTO BACKUP SYSTEM
+// ===================================
+
+async function backupAllData() {
+
+   const db = window.firebaseDB;
+
+   if(!db) return;
+
+   const allData = {
+
+      students:
+      JSON.parse(localStorage.getItem("lakshya-students") || "[]"),
+
+      payments:
+      JSON.parse(localStorage.getItem("lakshya-payments") || "[]"),
+
+      attendance:
+      JSON.parse(localStorage.getItem("lakshya-attendance") || "[]"),
+
+      teachers:
+      JSON.parse(localStorage.getItem("lakshya-teachers") || "[]")
+
+   };
+
+   await window.setDoc(
+      window.doc(db, "backup", "mainData"),
+      allData
+   );
+
+   console.log("Backup Completed");
+}
+
+setInterval(() => {
+
+   backupAllData();
+
+}, 10000);
