@@ -790,3 +790,27 @@ td {
     display: none;
   }
 }
+
+
+
+.id-details-wrapper{
+
+   display:flex;
+
+   align-items:center;
+
+   justify-content:space-between;
+
+   gap:30px;
+
+   width:100%;
+}
+
+#studentQR img{
+
+   width:120px;
+
+   height:120px;
+
+   object-fit:contain;
+}
