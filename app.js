@@ -381,20 +381,26 @@ function renderIdCard(student) {
         ${photo}
       </div>
 
-      <div class="id-details">
+      <div class="id-details-wrapper">
 
-        <p class="eyebrow">Student ID Card</p>
+   <div class="id-details">
 
-        <h3>${escapeHtml(student.studentName)}</h3>
+      <p class="eyebrow">Student ID Card</p>
 
-        <p>ID No: ${escapeHtml(student.studentId)}</p>
+      <h3>${escapeHtml(student.studentName)}</h3>
 
-        <p>Course: ${escapeHtml(student.course)}</p>
+      <p>ID No: ${escapeHtml(student.studentId)}</p>
 
-        <p>Joining: ${escapeHtml(student.joiningDate)}</p>
-        <div id="studentQR" style="margin-top:15px;"></div>
+      <p>Course: ${escapeHtml(student.course)}</p>
 
-      </div>
+      <p>Joining: ${escapeHtml(student.joiningDate)}</p>
+
+   </div>
+
+   <div id="studentQR"
+   style="margin-left:auto;"></div>
+
+</div>
 
     </div>
 
