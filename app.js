@@ -2164,14 +2164,7 @@ function generateStudentQR(studentId) {
 
    qrBox.innerHTML = "";
 
-   QRCode.toCanvas(studentId, {
-      width: 180
-   }, function (err, canvas) {
-
-      if(err) return;
-
-      qrBox.appendChild(canvas);
-   });
+  
 }
 
 // ===================================
