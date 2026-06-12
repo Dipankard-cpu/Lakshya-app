@@ -1178,25 +1178,7 @@ function blockManagerDelete(){
 
 const staffKey = "lakshya-staffs";
 
-function renderStaff(){
 
-  const staffs = JSON.parse(
-    localStorage.getItem(staffKey) || "[]"
-  );
-
-  const box = document.querySelector("#staffList");
-
-  if(!box) return;
-
-  box.innerHTML = staffs.map(staff => `
-    <div class="card">
-      <h4>${staff.name}</h4>
-      <p>ID : ${staff.staffId}</p>
-      <p>Role : ${staff.role}</p>
-      <p>Password : ${staff.password}</p>
-    </div>
-  `).join("");
-}
 
 document.addEventListener("submit", (e) => {
 
