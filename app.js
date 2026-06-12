@@ -1689,7 +1689,7 @@ function downloadPaymentCSV(){
    );
 
    const students = JSON.parse(
-      localStorage.getItem("lakshya-students") || "[]"
+      localStorage.getItem("studentPortalApplications") || "[]"
    );
 
    let csv =
@@ -1765,7 +1765,7 @@ function canManagePayments(){
 function renderStudentPaymentCard(studentId){
 
    const students = JSON.parse(
-      localStorage.getItem("lakshya-students") || "[]"
+      localStorage.getItem("studentPortalApplications") || "[]"
    );
 
    const payments = JSON.parse(
@@ -1869,7 +1869,7 @@ document.addEventListener("submit",(e)=>{
 function downloadSingleStudentPayment(studentId){
 
    const students = JSON.parse(
-      localStorage.getItem("lakshya-students") || "[]"
+      localStorage.getItem("studentPortalApplications") || "[]"
    );
 
    const payments = JSON.parse(
@@ -1954,7 +1954,7 @@ function normalizeId(id){
 function renderStudentPaymentCard(studentId){
 
    const students = JSON.parse(
-      localStorage.getItem("lakshya-students") || "[]"
+      localStorage.getItem("studentPortalApplications") || "[]"
    );
 
    const payments = JSON.parse(
@@ -2039,7 +2039,7 @@ function searchStudentPaymentCard(){
    const studentId = String(input.value).trim();
 
    const students = JSON.parse(
-      localStorage.getItem("lakshya-students") || "[]"
+      localStorage.getItem("studentPortalApplications") || "[]"
    );
 
    const payments = JSON.parse(
@@ -2124,7 +2124,7 @@ async function backupAllData() {
    const allData = {
 
       students:
-      JSON.parse(localStorage.getItem("lakshya-students") || "[]"),
+      JSON.parse(localStorage.getItem("studentPortalApplications") || "[]"),
 
       payments:
       JSON.parse(localStorage.getItem("lakshya-payments") || "[]"),
@@ -2187,7 +2187,7 @@ async function backupAllData() {
    const allData = {
 
       students:
-      JSON.parse(localStorage.getItem("lakshya-students") || "[]"),
+      JSON.parse(localStorage.getItem("studentPortalApplications") || "[]"),
 
       payments:
       JSON.parse(localStorage.getItem("lakshya-payments") || "[]"),
